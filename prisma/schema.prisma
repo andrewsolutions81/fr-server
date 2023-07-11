@@ -8,28 +8,14 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model User {
-  id             String   @id @default(cuid())
-  username       String
-  email          String   @unique
-  picture        String
-  password       String
-  phone_number   Int
-  favorite_homes Home[]
-  is_admin       Boolean  @default(false)
-  createdAt      DateTime @default(now())
-  updatedAt      DateTime @updatedAt
-}
-
 model Home {
   id             String   @id @default(cuid())
   title          String
-  available      Boolean  @default(true)
   description    String
   neighborhood   String
   address        String
   notes          String
-  images_url     Image[]
+  available      Boolean  @default(true)
   price          Int
   area           Int
   floor          Int
@@ -38,14 +24,20 @@ model Home {
   storage        Int
   antiquity      Int
   parking_spots  Int
+  images_url     String[]
   favorite_users User[]
   createdAt      DateTime @default(now())
   updatedAt      DateTime @updatedAt
 }
 
-model Image {
-  id         String  @id @default(cuid())
-  url        String
-  home_image Home[]
-  is_cover   Boolean @default(false)
+model User {
+  id             String   @id @default(cuid())
+  username       String
+  email          String   @unique
+  password       String
+  phone_number   Int
+  is_admin       Boolean  @default(false)
+  favorite_homes Home[]
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
 }
