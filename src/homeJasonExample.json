@@ -1,0 +1,18 @@
+{
+  "title": "home title example",
+  "available": false,
+  "description": "home description example",
+  "neighborhood": "home neighborhood example",
+  "address": "home address example",
+  "notes": "home notes example",
+  "price": "250",
+  "area": "100",
+  "floor": "3",
+  "rooms": "3",
+  "bathrooms": "3",
+  "storage": "1",
+  "antiquity": "1",
+  "parking_spots": "2",
+  "images_url": ["example image 1", "example image 2"],
+  "favorite_users": ["example userid 1", "example userid 2"]
+}
