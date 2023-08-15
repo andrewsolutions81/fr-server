@@ -1,14 +1,31 @@
-//configExpress.ts
-import express, { Application, urlencoded } from 'express'
-import morgan from 'morgan'
-import cors from 'cors'
+import express, {
+  Application,
+  urlencoded,
+  Request,
+  Response,
+  NextFunction,
+} from "express";
+import morgan from "morgan";
+import cors from "cors";
 
-//middlewares
+// Middlewares
 const configExpress = (app: Application): void => {
-  app.use(express.json())
-  app.use(morgan('dev'))
-  app.use(express.urlencoded({ extended: true }))
-  app.use(cors())
-}
+  // Logging middleware
+  app.use(morgan("dev"));
 
-export default configExpress
+  // Body parsing middleware
+  app.use(express.json());
+  app.use(express.urlencoded({ extended: true }));
+
+  // CORS middleware
+  app.use(cors());
+
+  // Error handling middleware
+  app.use((err: any, req: Request, res: Response, next: NextFunction) => {
+    console.error("❌error:", err);
+    res.status(500).send("Something went wrong.");
+  });
+};
+
+export default configExpress;
+

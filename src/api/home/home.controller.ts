@@ -85,8 +85,9 @@ export const deleteHomeController = async (
     const homeDelete = await deleteHomeService(id);
     res
       .status(204)
-      .json({ message: "✅ home delete successful:", data: homeDelete });
+      .json({ message: "✅ home delete successful:", data: existingHome });
   } catch (error: any) {
     res.status(500).json({ message: error.message });
   }
 };
+

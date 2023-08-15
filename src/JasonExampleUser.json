@@ -1,0 +1,8 @@
+{
+  "username": " user name example",
+  "email": "email@example.com",
+  "password": "password example",
+  "phone_number": "313123456",
+  "favorite_homes": ["fab home one", "fab home two"]
+}
+
