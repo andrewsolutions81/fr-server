@@ -32,7 +32,12 @@ export const getAllUsersService = () => {
       email: true,
       phone_number: true,
       is_admin: true,
-      favorite_homes: true,
+      favorite_homes: {
+        select: {
+          id: true,
+          title: true,
+        },
+      },
       createdAt: true,
       updatedAt: true,
     },
@@ -51,7 +56,12 @@ export const getUserByIdService = (id: string) => {
       password: true,
       phone_number: true,
       is_admin: true,
-      favorite_homes: true,
+      favorite_homes: {
+        select: {
+          id: true,
+          title: true,
+        },
+      },
       createdAt: true,
       updatedAt: true,
     },
