@@ -1,4 +1,5 @@
 //types&interfaces.ts
+import { Request } from "express";
 
 interface homeInterface {
   id: string;
@@ -29,3 +30,8 @@ interface userInterface {
   is_admin: boolean;
   favorite_homes: homeInterface[];
 }
+
+export interface AuthUser extends Request {
+  user?: string;
+}
+
