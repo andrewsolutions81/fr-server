@@ -1,27 +1,27 @@
 // auth.middleware.ts
 import { Request, Response, NextFunction } from "express";
 import { verifyToken } from "../services/auth/auth.services";
-import { AuthUser } from "../types";
+import { AuthUserInterface } from "../types";
 
-export const auth = (req: AuthUser, res: Response, next: NextFunction) => {
+const auth = (req: AuthUserInterface, res: Response, next: NextFunction) => {
   try {
-    // En el back es con minuscula y en el front es con mayuscula
+    // back lowerCase and uperCase in the front headers - Authorization Bearer <"token">
     const { authorization } = req.headers;
 
     if (!authorization) {
-      throw new Error("Su sesión expiró");
+      throw new Error("❌ session expired. $no_authorizationinheader");
     }
 
-    //Separar beare del token
+    // split token from bearer
     const [_, token] = authorization.split(" ");
 
     if (!token) {
-      throw new Error("Su sesión expiró");
+      throw new Error("❌ session expired . $no_token");
     }
 
-    //Reversión de la codificación del token
+    //token verification 
     const { id } = verifyToken(token) as { id: string };
-
+    //custom mutation of the request object for having <user>
     req.user = id;
 
     next();
@@ -29,3 +29,4 @@ export const auth = (req: AuthUser, res: Response, next: NextFunction) => {
     res.status(401).json({ message: error.message });
   }
 };
+export default auth;

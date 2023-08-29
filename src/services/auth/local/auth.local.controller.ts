@@ -2,11 +2,9 @@
 import { createUserService } from "../../../api/user/user.service";
 import { Request, Response, NextFunction } from "express";
 import bcrypt from "bcrypt";
-// import jwt from "jsonwebtoken";
-import { login } from "../auth.services";
+import jwt from "jsonwebtoken";
+import { loginService } from "../auth.services";
 import { signToken } from "../auth.services";
-// import { sendNodeMailer } from "../../config/nodemailer";
-// import { welcomeEmail } from "../../utils/emails";
 
 export const singupController = async (
   req: Request,
@@ -21,10 +19,7 @@ export const singupController = async (
       password: encryptedPassword,
     });
 
-    // const token = signToken({ id: user.id });
-    const token = "i will be a token";
-
-    // await sendNodeMailer(welcomeEmail(user));
+    const token = signToken({ id: user.id });
 
     res.status(201).json({
       message: "✅ successful user signup:",
@@ -40,17 +35,16 @@ export const singupController = async (
 export const loginController = async (req: Request, res: Response) => {
   try {
     const { email, password } = req.body;
-
-    const user = await login(email);
+    const user = await loginService(email);
 
     if (!user) {
-      throw new Error("Email o contraseña invalido");
+      throw new Error("❌ wrong credentials. $_no_user_email_login");
     }
 
     const isValid = await bcrypt.compare(password, user.password);
 
     if (!isValid) {
-      throw new Error("Email o contraseña invalido");
+      throw new Error("❌ wrong credentials. $_no_valid_password");
     }
 
     const { id, username } = user;
@@ -58,8 +52,8 @@ export const loginController = async (req: Request, res: Response) => {
     const token = signToken({ id: user.id });
 
     res.status(201).json({
-      message: "User login successfully",
-      data: { email, username },
+      message: "✅ successful user login:",
+      data: { username, email },
       token,
     });
   } catch (error: any) {

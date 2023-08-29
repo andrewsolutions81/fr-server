@@ -1,7 +1,7 @@
 //types&interfaces.ts
 import { Request } from "express";
 
-interface homeInterface {
+export interface homeInterface {
   id: string;
   title: string;
   description: string;
@@ -21,7 +21,7 @@ interface homeInterface {
   favorite_users: userInterface[];
 }
 
-interface userInterface {
+export interface userInterface {
   id: string;
   username: string;
   email: string;
@@ -31,7 +31,7 @@ interface userInterface {
   favorite_homes: homeInterface[];
 }
 
-export interface AuthUser extends Request {
+export interface AuthUserInterface extends Request {
   user?: string;
 }
 

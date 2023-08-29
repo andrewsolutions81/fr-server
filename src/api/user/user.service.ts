@@ -1,5 +1,6 @@
 // user.service.ts
 import { PrismaClient } from "@prisma/client";
+import { userInterface } from "../../types";
 
 const prisma = new PrismaClient();
 
@@ -11,7 +12,7 @@ const extractUserInputData = (input: userInterface) => {
     username,
     email,
     password,
-    phone_number: parseInt(phone_number.toString()),
+    phone_number,
     is_admin,
   };
 };

@@ -7,6 +7,7 @@ import {
   updateUserService,
   deleteUserService,
 } from "./user.service";
+import { AuthUserInterface } from "../../types";
 
 export const createUserController = async (
   req: Request,
@@ -54,17 +55,18 @@ export const getUserByIdController = async (
 };
 
 export const updateUserController = async (
-  req: Request,
+  req: AuthUserInterface,
   res: Response,
   next: NextFunction
 ) => {
   try {
-    const { id } = req.params;
+    const id = req.user ? req.user : "";
+    const user = await getUserByIdService(id);
     const userUpdate = await updateUserService(id, req.body);
     if (!userUpdate) {
       res.status(404).json({ message: "❌ user to update NOT found." });
     }
-    res.status(202).json({ message: "✅ user updated:", data: userUpdate });
+    res.status(200).json({ message: "✅ user updated:", data: userUpdate });
   } catch (error: any) {
     res.status(500).json({ message: error.message });
   }
