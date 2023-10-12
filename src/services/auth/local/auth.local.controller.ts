@@ -18,7 +18,6 @@ export const singupController = async (
     const user = await createUserService({
       ...req.body,
       password: encryptedPassword,
-      phone_number: getNumbers(phone_number),
     });
 
     const token = signToken({ id: user.id });

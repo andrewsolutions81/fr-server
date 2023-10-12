@@ -7,6 +7,7 @@ import express, {
 } from "express";
 import morgan from "morgan";
 import cors from "cors";
+import logger from "../utils/logger"; // Import the logger
 
 // Middlewares
 const configExpress = (app: Application): void => {
@@ -20,10 +21,15 @@ const configExpress = (app: Application): void => {
   // CORS middleware
   app.use(cors());
 
-  // Error handling middleware
+  // Middleware to log every request
+  app.use((req, res, next) => {
+    logger.info(`${req.method} ${req.originalUrl}`);
+    next();
+  });
+
   app.use((err: any, req: Request, res: Response, next: NextFunction) => {
-    console.error("❌ error:", err);
-    res.status(500).send(`Something went wrong :${err}`);
+    logger.error(`❌ error: ${err}`);
+    res.status(500).send(`Something went wrong: ${err}`);
   });
 };
 

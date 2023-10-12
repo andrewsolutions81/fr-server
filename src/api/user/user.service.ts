@@ -1,6 +1,6 @@
 // user.service.ts
 import { PrismaClient } from "@prisma/client";
-import { userInterface } from "../../types";
+import { userInterface, signupInput } from "../../types";
 
 const prisma = new PrismaClient();
 
@@ -17,9 +17,7 @@ const extractUserInputData = (input: userInterface) => {
   };
 };
 
-export const createUserService = (input: userInterface) => {
-  const data = extractUserInputData(input);
-
+export const createUserService = (data: signupInput) => {
   return prisma.user.create({
     data,
   });
