@@ -22,8 +22,8 @@ const configExpress = (app: Application): void => {
 
   // Error handling middleware
   app.use((err: any, req: Request, res: Response, next: NextFunction) => {
-    console.error("❌error:", err);
-    res.status(500).send("Something went wrong.");
+    console.error("❌ error:", err);
+    res.status(500).send(`Something went wrong :${err}`);
   });
 };
 
