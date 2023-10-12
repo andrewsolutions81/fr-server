@@ -5,6 +5,7 @@ import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import { loginService } from "../auth.services";
 import { signToken } from "../auth.services";
+import { getNumbers } from "../../stringToNumber";
 
 export const singupController = async (
   req: Request,
@@ -17,6 +18,7 @@ export const singupController = async (
     const user = await createUserService({
       ...req.body,
       password: encryptedPassword,
+      phone_number: getNumbers(phone_number),
     });
 
     const token = signToken({ id: user.id });
