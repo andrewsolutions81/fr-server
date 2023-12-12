@@ -1,5 +1,6 @@
 //home.service.ts
 import { PrismaClient } from "@prisma/client";
+import { homeInterface } from "../../types";
 
 const prisma = new PrismaClient();
 
@@ -59,7 +60,7 @@ export const getAllHomesService = () => {
       neighborhood: true,
       address: true,
       notes: true,
-      images_url: true,
+      images: true,
       price: true,
       area: true,
       floor: true,
@@ -96,7 +97,7 @@ export const getHomeByIdService = (id: string) => {
       storage: true,
       antiquity: true,
       parking_spots: true,
-      images_url: true,
+      images: true,
       favorite_users: true,
       createdAt: true,
       updatedAt: true,
@@ -122,3 +123,4 @@ export const deleteHomeService = (id: string) => {
     },
   });
 };
+

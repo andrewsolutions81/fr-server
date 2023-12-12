@@ -23,7 +23,7 @@ model Home {
   storage        Int
   antiquity      Int
   parking_spots  Int
-  images_url     String[]
+  images         Image[]
   favorite_users User[]   @relation("HomeFavorites")
   createdAt      DateTime @default(now())
   updatedAt      DateTime @updatedAt
@@ -39,4 +39,30 @@ model User {
   favorite_homes Home[]   @relation("HomeFavorites")
   createdAt      DateTime @default(now())
   updatedAt      DateTime @updatedAt
+}
+
+model Image {
+  id                String   @id @default(cuid())
+  asset_id          String
+  public_id         String
+  version           Int
+  version_id        String
+  signature         String
+  width             Int
+  height            Int
+  format            String
+  resource_type     String
+  created_at        DateTime
+  tags              String[]
+  bytes             Int
+  type              String
+  etag              String
+  placeholder       Boolean
+  url               String
+  secure_url        String
+  folder            String
+  original_filename String
+  api_key           String
+  home              Home     @relation(fields: [homeId], references: [id])
+  homeId            String
 }
