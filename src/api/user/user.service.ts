@@ -52,7 +52,6 @@ export const getUserByIdService = (id: string) => {
       id: true,
       username: true,
       email: true,
-      password: true,
       phone_number: true,
       is_admin: true,
       favorite_homes: {
