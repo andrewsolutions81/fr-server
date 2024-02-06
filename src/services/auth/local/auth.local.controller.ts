@@ -24,7 +24,7 @@ export const singupController = async (
 
     res.status(201).json({
       message: "✅ successful user signup:",
-      data: { username, email },
+      data: { username, email, id: user.id },
       token,
     });
   } catch (error: any) {
