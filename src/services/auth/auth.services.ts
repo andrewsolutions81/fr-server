@@ -14,7 +14,7 @@ export const loginService = (email: string) => {
 };
 
 export const signToken = (payload: any) => {
-  const token = jwt.sign(payload, SECRET, { expiresIn: 60 * 60 * 24 });
+  const token = jwt.sign(payload, SECRET, { expiresIn: 60 * 60 * 24 * 30 }); // one month
 
   return token;
 };

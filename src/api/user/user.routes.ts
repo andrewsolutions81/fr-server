@@ -4,6 +4,7 @@ import {
   createUserController,
   getAllUsersController,
   getUserByIdController,
+  getUserBySecureIdController,
   updateUserController,
   deleteUserController,
 } from "./user.controller";
@@ -14,6 +15,7 @@ const router = Router();
 router.post("/", createUserController);
 router.get("/", getAllUsersController);
 router.get("/:id", getUserByIdController);
+router.get("/secure/:id", auth, getUserBySecureIdController);
 router.put("/", auth, updateUserController);
 router.delete("/:id", auth, deleteUserController);
 

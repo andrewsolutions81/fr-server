@@ -54,6 +54,25 @@ export const getUserByIdController = async (
   }
 };
 
+export const getUserBySecureIdController = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  try {
+    const { id } = req.params;
+    const userById = await getUserByIdService(id);
+    if (!userById) {
+      res.status(404).json({ message: "❌ Secure single user NOT found ." });
+    }
+    res
+      .status(200)
+      .json({ message: "✅ Secure single user found:", data: userById });
+  } catch (error: any) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
 export const updateUserController = async (
   req: AuthUserInterface,
   res: Response,

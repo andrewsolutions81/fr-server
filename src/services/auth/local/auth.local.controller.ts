@@ -2,10 +2,8 @@
 import { createUserService } from "../../../api/user/user.service";
 import { Request, Response, NextFunction } from "express";
 import bcrypt from "bcrypt";
-import jwt from "jsonwebtoken";
 import { loginService } from "../auth.services";
 import { signToken } from "../auth.services";
-import { getNumbers } from "../../stringToNumber";
 
 export const singupController = async (
   req: Request,
